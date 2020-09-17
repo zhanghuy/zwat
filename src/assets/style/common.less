@@ -1,0 +1,1132 @@
+// stylelint-disable
+// 全局颜色属性
+@main-text: #333333;
+@normal-text: #555555;
+@minor-text: #999999;
+@cutLine-dark: #e4e4e4;
+@cutLine-light: #f0f0f0;
+@border-color: #dbdbdb;
+@button-default-border: 1px solid #e1e2e6;
+@button-hover-border: 1px solid #dcdde0;
+@button-focus-border: 1px solid #dcdde0;
+@bg: #f0f2f5;
+
+@main-green: #42c57a;
+@button-default-white: #ffffff;
+@button-hover-green: #4fca85;
+@button-hover-white: #f7f8fb;
+@button-focus-green: #38bc6d;
+@button-focus-white: #dcdde0;
+@button-disabled: #ebecf0;
+
+@table-background: #f8f8fa;
+@font-family: Microsoft YaHei;
+
+@form-label: #757678;
+@form-input-inner: #323233;
+
+@table-th-text: #757678;
+@table-tb-text: #323233;
+@table-th-bg: #f7f8fB;
+@table-tb-hover-bg: #f0f1f5;
+
+/* 全局函数 */
+.transition(@target) {
+  transition: @target 0.3s;
+}
+.menu-common-part() {
+  height: 48px;
+  line-height: 48px;
+  font-size: 14px;
+  color: @main-text;
+  font-family: @font-family;
+}
+
+// 左侧菜单栏
+@keyframes openLeftMenu {
+  0% {
+    left: -200px;
+    opacity: 0.5;
+  }
+  50% {
+    left: -100px;
+    opacity: 0.5;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+// 上面导航栏
+@keyframes openHeadMenu {
+  0% {
+    top: -200px;
+    opacity: 0.5;
+  }
+  50% {
+    top: -100px;
+    opacity: 0.5;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes moveTable {
+  from {
+    transform: translateX(300%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.intro-loop(@n, @i:1) when (@i <= @n) {
+  &:nth-child(@{i}){
+    animation: moveTable ( .15s * @i ) ease-in-out;
+  }
+  .intro-loop(@n, (@i + 1));
+}
+/*头部*/
+body {
+  background: @bg;
+  font-family: @font-family !important;
+  font-size: 14px;
+  color: @main-text;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  perspective: 1200px;
+  // overflow: hidden;
+  a {
+    text-decoration: none;
+  }
+  // 页面顶部
+  .sc_header {
+    height: 50px;
+    background: #ffffff;
+    border-bottom: 1px solid #d8dce5;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    min-width: 920px;
+    animation: openHeadMenu 0.6s ease-in-out;
+  }
+  .sch {
+    .common_wrapper() {
+      height: 50px;
+      // line-height: 50px;
+    }
+    .common_img(@height:14px, @width:14px) {
+      height: @height;
+      width: @width;
+      display: inline-block;
+      background-size: cover;
+      vertical-align: middle;
+    }
+    &_left {
+      background-color: @main-green;
+      width: 160px;
+      float: left;
+      .transition(width);
+      text-align: center;
+      .common_wrapper;
+      .sc_logo {
+        background: url('https://yy-s.zuoyebang.cc/static/yike_logo/logo-yk-white.svg') no-repeat 50%;
+        .common_img(40px, 116px);
+        background-size: contain;
+        margin-top:7px;
+      }
+    }
+    &_center {
+      position: relative;
+      line-height: 50px;
+      margin-left: 160px;
+      .transition(margin-left);
+      margin-right: 322px;
+      .common_wrapper;
+      .icon_meun {
+        background: url('../imgs/ic_menuPackUp_normal.png') no-repeat 0 0;
+        margin: -2px 0 0 10px;
+        cursor: pointer;
+        .common_img;
+      }
+      .icon_meun:hover {
+        background-image: url('../imgs/ic_menuPackUp_hover.png');
+      }
+    }
+    &_right {
+      // width: 78px;
+      float: right;
+      position: relative;
+      margin-right: 40px;
+      width: 322px;
+      .common_wrapper;
+      span {
+        padding: 0 10px;
+        cursor: pointer;
+        &:hover {
+          color: @main-green;
+        }
+        &.st_arrow {
+          padding: 0;
+        }
+      }
+      .icon_user {
+        background: url('../imgs/touxiang.png') no-repeat 0 0;
+        .common_img(34px, 34px);
+      }
+      .icon_arrow {
+        background: url('../imgs/ic_arrowdown_normal.png') no-repeat 0 0;
+        .common_img;
+      }
+      .st_arrow_area {
+        display: none;
+        background-color: #ffffff;
+        width: 208px;
+        position: absolute;
+        right: -8px;
+        font-size: 12px;
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+        padding: 8px 16px 8px;
+        text-align: center;
+        .st_name {
+          height: 20px;
+          padding-bottom: 8px;
+          line-height: 20px;
+          border-bottom: 1px solid #f0f0f0;
+          &:hover {
+            color: #333333;
+          }
+        }
+        .st_card {
+          height: 20px;
+          padding: 8px 0;
+          line-height: 20px;
+          border-bottom: 1px solid #f0f0f0;
+        }
+        .st_loginOut {
+          padding-top: 8px;
+          color: #f06c4d;
+          line-height: 18px;
+          height: 18px;
+          &:hover {
+            color: #f06c4d;
+          }
+        }
+      }
+      .st_user_dropdown {
+        &:hover {
+          .icon_arrow {
+            background-image: url('../imgs/ic_arrowup_normal.png') !important;
+          }
+          .st_arrow_area {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  // 此处是未知用途
+  .disnone {
+    display: none !important;
+  }
+  .sc_content {
+    background-color: red;
+  }
+  .sc_menu {
+    background: #ffffff;
+    border-right: 1px solid #d8dce5;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+    width: 159px;
+    position: fixed;
+    left: 0;
+    top: 50px;
+    bottom: 0;
+    z-index: 999;
+    overflow-y: auto;
+    overflow-x: hidden;
+    // transition: width 0.3s;
+    animation: openLeftMenu 0.6s ease-in-out;
+    .el-submenu.is-opened .el-submenu__title .sub-title {
+      padding-left: 20px;
+      border-radius: 2px;
+    }
+    &_ul {
+      padding-top: 0px;
+    }
+  }
+  // 右侧内容区
+  .index {
+    height: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    .content {
+      height: 100%;
+      overflow: hidden;
+    }
+    #mainView {
+      border: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .menuCollapse {
+    overflow: hidden;
+    width: 50px !important;
+    transition: width 0.3s;
+  }
+  .tableCollapse {
+    margin-left: 50px !important;
+  }
+  // 水晶头骨
+  .context_menu_wrap {
+    &.is_top {
+      width: 90%;
+      position: absolute;
+      top: 0;
+      left: 34px;
+    }
+  }
+  // .el-icon-arrow-down {
+  //   width: 16px;
+  //   height: 16px;
+  //   display: inline-block;
+  //   background: url('../imgs/ic_arrowdown_normal.png') no-repeat 0 0;
+  //   background-size: cover;
+  // }
+  .el-menu--collapse .el-submenu .el-menu {
+    margin-left: 0;
+  }
+  .table-box {
+    box-sizing: border-box;
+    height: 100%;
+    overflow: auto;
+    padding: 68px 18px 0px;
+    margin-left: 160px;
+    transition: margin-left 0.3s;
+    &.tableCollapse {
+      margin-left: 0;
+      .transition(margin-left);
+    }
+  }
+  // table样式
+  .el-table {
+    thead {
+      height: 40px;
+      line-height: 40px;
+      background: @table-background;
+      th {
+        padding: 0;
+        font-family: @font-family;
+        font-size: 12px;
+        color: @table-th-text;
+        text-align: center;
+        background-color: #fafafb;
+        border: none !important;
+        &.descending {
+          i.descending {
+            color: @main-green !important;
+          }
+        }
+        &.ascending {
+          i.ascending {
+            color: @main-green !important;
+          }
+        }
+      }
+    }
+    tbody {
+      // animation: moveTable .1s ease-in-out;
+      // transform-origin:left;
+      tr {
+        transform-origin:left;
+        // .intro-loop(20);
+      }
+      td {
+        font-family: @font-family;
+        font-size: 12px;
+        color: @normal-text;
+        padding: 5px 0;
+        text-align: center;
+        border: none !important;
+        .operationWithData,
+        .operation {
+          color: @main-green;
+          cursor: pointer;
+        }
+      }
+    }
+    &--striped .el-table__body tr.el-table__row--striped td {
+      background: @table-background;
+    }
+    // 表格流式布局头部底边框线
+    &--fluid-height {
+      thead {
+        tr {
+          background-color: transparent;
+          border: none;
+        }
+        th {
+          border-bottom: 1px solid #e6e4e4 !important;
+        }
+      }
+    }
+  }
+  // 修改翻页
+  .page {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .el-pagination {
+    color: red;
+    font-weight: normal;
+    &__editor.el-input .el-input__inner {
+      border-radius: 1px;
+      font-size: 10px;
+      &:focus {
+        border-color: @main-green;
+      }
+    }
+    button {
+      min-width: 28px;
+      border: 1px solid @border-color;
+      &.btn-prev {
+        padding-right: 5px;
+        &:hover {
+          color: @main-green;
+        }
+        &.disabled {
+          color: #b4bccc;
+        }
+      }
+      &.btn-next {
+        margin-left: 10px;
+        padding-left: 5px;
+        &:hover {
+          color: @main-green;
+        }
+        &.disabled {
+          color: #b4bccc;
+        }
+      }
+    }
+    &__total {
+      margin-right: 10px;
+      font-weight: 400;
+      color: #5a5e66;
+    }
+    &-box {
+      display: flex;
+      flex-direction: row-reverse;
+      padding: 20px 0;
+    }
+  }
+  .el-pager li {
+    border: 1px solid @border-color;
+    border-radius: 1px;
+    margin-left: 10px;
+    min-width: 28px;
+    font-size: 10px;
+    color: @main-text;
+    &:hover {
+      color: @main-green;
+    }
+    &.active {
+      color: #ffffff;
+      background-color: @main-green;
+      &:hover {
+        color: white;
+        cursor: pointer;
+      }
+      & + li {
+        border: 1px solid @border-color;
+      }
+    }
+  }
+  // 修改el-input
+  input.el-input__inner {
+    border-radius: 2px;
+    border: 1px solid @border-color;
+    color: @form-input-inner;
+    font-size: 12px;
+    height: 28px;
+  }
+  div.el-input__inner:focus {
+    border-color: @main-green;
+  }
+  span.el-input__prefix {
+    i {
+      line-height: 28px;
+      padding-left: 5px;
+    }
+  }
+  span.el-input__suffix-inner {
+    i {
+      line-height: 28px;
+      padding-right: 5px;
+    }
+  }
+  input[type='password']:focus,
+  input[type='text']:focus {
+    box-shadow: none;
+    border: @main-green 1px solid;
+  }
+  .el-input-number {
+    & > span {
+      height: 25px;
+      line-height: 25px;
+      top: 1.5px;
+      &.el-input-number__increase {
+        margin-right: 0.5px;
+      }
+    }
+    & > span:hover {
+      color: @main-green;
+      & ~ div {
+        input {
+          border-color: @main-green !important;
+        }
+      }
+    }
+  }
+  // textarea样式
+  .el-textarea__inner {
+    border-radius: 2px;
+    font-size: 12px;
+    &:focus {
+      border-color: @main-green;
+    }
+    &::placeholder {
+      font-size: 12px;
+    }
+  }
+  // 修改el-tab
+  .el-tabs {
+    &__item:hover,
+    &__item.is-active {
+      color: @main-green;
+    }
+    &__active-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background-color: @main-green;
+    }
+    &__nav-wrap::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #ffffff;
+      z-index: 1;
+    }
+    &--border-card > .el-tabs__header .el-tabs__item {
+      &.is-active {
+        color: @main-green;
+      }
+      &:hover {
+        color: @main-green;
+      }
+      &:focus.is-active.is-focus:not(:active) {
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+  }
+  // 修改下拉选择
+  .el-select {
+    .el-input__inner:focus {
+      border-color: @main-green;
+    }
+    .el-input.is-focus {
+      .el-input__inner {
+        border-color: @main-green;
+        &:focus {
+          border-color: @main-green;
+        }
+      }
+    }
+    &-dropdown {
+      border-radius: 2px;
+      .el-select-dropdown__item {
+        font-size: 12px;
+        &.selected {
+          color: @main-green !important;
+        }
+      }
+    }
+  }
+  // button 按钮
+  .el-button {
+    border-radius: 2px;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    min-width: 80px;
+    margin: 0 5px 0 0;
+    padding: 0 10px;
+    & > span {
+      font-size: 12px;
+      position: relative;
+      top: -1px;
+      & > .el-icon-close {
+        &:hover {
+          color: @main-green;
+        }
+      }
+    }
+    &--default {
+      background-color: @button-default-white;
+      border: @button-default-border;
+      & > span {
+        color: @main-text;
+      }
+      &:hover {
+        background-color: @button-hover-white;
+        border: @button-hover-border;
+      }
+      &:link,
+      &:visited,
+      &:active,
+      &:focus {
+        background-color: @button-focus-white;
+        border: @button-focus-border;
+      }
+    }
+    &--primary {
+      border: 1px solid @main-green;
+      background-color: @main-green;
+      & > span {
+        color: white;
+      }
+      &:hover {
+        color: white;
+        background-color: @button-hover-green;
+        border: 1px solid @button-hover-green;
+      }
+      &:disabled {
+        color: white;
+        background-color: @button-disabled;
+        border: @button-focus-border;
+      }
+      &:link,
+      &:visited,
+      &:active,
+      &:focus {
+        background-color: @button-focus-green;
+        border: 1px solid @button-focus-green;
+      }
+    }
+    &--text {
+      & > span,
+      & > i {
+        color: @main-green;
+      }
+    }
+    &.is-disabled:hover > span {
+      color: #b4bccc;
+    }
+  }
+  // 修改对话框
+  .el-dialog {
+    &__title {
+      line-height: 18px;
+      font-size: 14px;
+      font-family: @font-family;
+      font-weight: bold;
+    }
+    &__header {
+      padding: 15px 15px 0 20px;
+      .el-dialog__headerbtn:hover i {
+        color: @main-green;
+      }
+    }
+    &__body {
+      padding: 15px 35px;
+    }
+  }
+  // 修改form
+  .el-form-item {
+    margin-bottom: 20px;
+    height: 28px;
+    .el-form-item__label {
+      height: 28px;
+      line-height: 28px;
+      color: @form-label;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .el-form-item__content {
+      height: 28px;
+      line-height: 28px;
+      .el-date-editor {
+        border-radius: 2px;
+        height: 28px;
+        //padding: 0 10px;
+        & > i {
+          height: 25px;
+          line-height: 26px;
+        }
+        & > span {
+          font-size: 12px;
+          height: 25px;
+          line-height: 26px;
+        }
+        & > input.el-range-input {
+          font-size: 12px;
+          height: 25px;
+          line-height: 26px;
+        }
+      }
+    }
+  }
+  // radio单选
+  .el-radio {
+    &__label {
+      font-size: 12px;
+      padding-left: 5px;
+    }
+    &__inner {
+      &:hover {
+        border: 1px solid @main-green;
+      }
+    }
+    &__input.is-checked {
+      .el-radio__inner {
+        border-color: @main-green;
+        background: @main-green;
+      }
+      &.is-checked + .el-radio__label {
+        color: @main-green;
+      }
+    }
+    &-button__inner:hover {
+      color: @main-green;
+    }
+    &:focus:not(.is-focus):not(:active) .el-radio__inner {
+      box-shadow: 0 0 2px 2px @button-default-white;
+    }
+    &-button__orig-radio:checked + .el-radio-button__inner {
+      border-color: @main-green;
+      background: @main-green;
+    }
+  }
+  // checkbox 多选框
+  .el-checkbox {
+    &__label {
+      padding-left: 5px;
+      font-size: 12px;
+    }
+    &__input {
+      &.is-focus .el-checkbox__inner {
+        border-color: @main-green;
+      }
+      &.is-checked .el-checkbox__inner {
+        border-color: @main-green;
+        background: @main-green;
+      }
+      &.is-checked + .el-checkbox__label {
+        color: @main-green;
+      }
+      &.is-indeterminate .el-checkbox__inner {
+        background-color: @main-green;
+        border-color: @main-green;
+      }
+      :hover {
+        border: 1px solid @main-green;
+      }
+    }
+  }
+  // 修改日期选时的择浮动框
+  .el-date-range-picker,
+  .el-date-picker {
+    width: auto;
+    line-height: 25px;
+    border-radius: 2px;
+    .el-date-picker__header {
+      & > span.el-date-picker__header-label {
+        &:hover {
+          color: @main-green;
+        }
+      }
+      & > button.el-picker-panel__icon-btn {
+        &:hover {
+          color: @main-green;
+        }
+      }
+    }
+    .el-picker-panel__content {
+      width: 260px;
+      font-size: 12px;
+      .el-date-range-picker__header {
+        .el-picker-panel__icon-btn {
+          &:hover {
+            color: @main-green;
+          }
+        }
+      }
+      .el-date-table__row {
+        & > td {
+          padding: 2px 0;
+          div {
+            box-sizing: border-box;
+            padding-left: 5px;
+          }
+          &.available:hover {
+            color: @main-green;
+          }
+          &.today span {
+            color: @main-green;
+          }
+          &.start-date span,
+          &.end-date span,
+          &.current span {
+            color: white;
+            background-color: @main-green;
+          }
+        }
+      }
+      .el-year-table,
+      .el-month-table {
+        td:hover a {
+          color: @main-green;
+        }
+        td.current a {
+          color: @main-green;
+        }
+        td.today a {
+          color: #5a5e66;
+        }
+        td.today.current a {
+          color: @main-green;
+        }
+      }
+    }
+    .el-picker-panel__footer {
+      & > button.is-plain:hover {
+        border-color: @main-green;
+      }
+    }
+  }
+  .el-date-picker {
+    .el-picker-panel__content {
+      width: 324px;
+    }
+  }
+  .el-range-editor.is-active {
+    border-color: @main-green;
+    &:hover {
+      border-color: @main-green;
+    }
+  }
+  .el-date-range-picker__time-header {
+    width: 520px;
+    .el-time-panel__footer {
+      & > button.confirm {
+        color: @main-green;
+      }
+    }
+  }
+  // 修改card样式
+  .el-card {
+    box-shadow: none;
+    border: none;
+    border-radius: 2px;
+    color: inherit;
+    .el-card__body {
+      padding: 14px 16px;
+    }
+  }
+  // 修改popover样式
+  .el-popover {
+    border-radius: 2px;
+    color: @main-text;
+    font-size: 12px;
+    border: none;
+    p {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  // 修改autocomplete样式
+  .el-autocomplete-suggestion li {
+    font-size: 12px;
+  }
+  .el-autocomplete-suggestion__wrap {
+    border: none;
+    border-radius: 2px;
+    padding: 4px 0;
+  }
+  .el-popper[x-placement^='bottom'] {
+    margin-top: 10px;
+  }
+  // 滑块开关样式公共
+  .el-switch {
+    font-size: 12px;
+    color: @main-text;
+    font-weight: bold;
+    .el-switch__label.is-active {
+      color: @main-green;
+    }
+    &.is-checked .el-switch__core {
+      background-color: @main-green;
+      border-color: @main-green;
+    }
+  }
+  // 修改message样式
+  .el-message {
+    background: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+    .el-message__content {
+      color: @main-text;
+      font-size: 14px;
+    }
+    .el-icon-success {
+      color: @main-green;
+    }
+    &--success {
+      .el-message__content {
+        color: @main-green;
+      }
+    }
+  }
+  .el-cascader {
+    line-height: 28px;
+    .el-input__suffix {
+      .el-icon-arrow-down {
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+  .el-progress {
+    &.is-success .el-progress-bar__inner {
+      background-color: @main-green;
+    }
+  }
+  .card-dialog {
+    .el-dialog {
+      width: 800px;
+      height: 510px;
+      .el-dialog__header {
+        padding: 0;
+      }
+      .el-dialog__body {
+        padding: 16px;
+      }
+    }
+  }
+  // 修改下拉菜单hover样式
+  .el-dropdown-menu {
+    &__item {
+      line-height: 30px;
+      font-size: 12px;
+      &:not(.is-disabled):hover {
+        color: @main-green;
+      }
+    }
+  }
+}
+// 列表展示页样式
+.page_main {
+  .page_title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 10px;
+  }
+  .open_search {
+    float: right;
+    opacity: 0.5;
+    font-size: 12px;
+    vertical-align: bottom;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .page_card {
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+  }
+  .page_card_padding {
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .page_search_btn {
+    text-align: right;
+    position: relative;
+  }
+  .page_card_bottom {
+    margin-bottom: 10px;
+  }
+  .page_pagination_main {
+    text-align: right;
+  }
+  .page_search_btn_wrapper {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .btn_icon_type {
+    height: auto;
+    background-size: 0;
+  }
+}
+// 顶部右侧操作区域
+.right-area-toolbar {
+  position: absolute;
+  z-index: 10;
+  background-color: #fff;
+  top: 100%;
+  right: -24px;
+  width: 208px;
+  padding: 18px 16px 8px;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  text-align: center;
+  font-size: 12px;
+
+  .name {
+    height: 20px;
+    line-height: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .system-item {
+    display: block;
+    padding: 8px 0;
+    line-height: 18px;
+    height: 18px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    &:hover {
+      color: #333;
+    }
+  }
+  .quit {
+    cursor: pointer;
+    padding-top: 8px;
+    color: #f06c4d;
+    line-height: 18px;
+    height: 18px;
+  }
+}
+
+// 右侧操作区域
+.sch_right {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  float: right;
+  height: 50px;
+  .st_user_dropdown {
+    width: 78px;
+    line-height: 50px;
+    height: 50px;
+  }
+  .st_user {
+    vertical-align: top;
+  }
+  .sch_opts {
+    box-sizing: border-box;
+    padding: 8px 10px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+}
+
+.ic_rotate {
+  transform: rotate(45deg);
+}
+
+.mt50 {
+  margin-top: 50px;
+}
+
+// 所有二级菜单 index.vue 内的必要样式
+.router-main {
+  height: calc(100% - 50px);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+
+  >:first-child {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+/* icon 调整*/
+.ts_icon{
+  i{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+  }
+}
+.icon_tips{
+  background: url('../imgs/icon_tips.png') 0 0 no-repeat;
+  background-size: cover;
+}
+.icon_font{
+  background: url('../imgs/icon_font.png') 0 0 no-repeat;
+  background-size: cover;
+}
+.icon_theme{
+  background: url('../imgs/icon_theme.png') 0 0 no-repeat;
+  background-size: cover;
+}
+.icon_en{
+  background: url('../imgs/icon_en.png') 0 0 no-repeat;
+  background-size: cover;
+}
+.icon_delete{
+  background: url('../imgs/icon_delete2.png') 0 0 no-repeat;
+  background-size: cover;
+  padding-top:3px;
+}
+// 表单中动态部分样式
+.other_form {
+  display: flex;
+  align-items: center;
+  .form_item_label {
+    text-align: right;
+    width: 112px;
+    padding: 0 15px;
+    color: #757678;
+    font-weight: bold;
+    box-sizing: border-box;;
+  }
+  .el-input {
+    width: 500px;
+  }
+}
+.el-dialog__header {
+  .el-dialog__headerbtn {
+    top: 12px;
+    right: 16px;
+    .el-dialog__close {
+      color: #909399;
+    }
+  }
+}

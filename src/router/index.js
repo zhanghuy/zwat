@@ -1,14 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
+
+export const children = [{
+  path: '/CaseManage',
+  component: () => import('../views/CaseManage.vue'),
+  name: '用例管理'
+}, {
+  path: '/CaseExecute',
+  component: () => import('../views/CaseExecute.vue'),
+  name: '用例执行'
+}]
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('../views/Home.vue'),
+    redirect: 'CaseManage',
+    children
   },
   {
     path: '/about',
