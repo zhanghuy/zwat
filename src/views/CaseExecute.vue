@@ -33,7 +33,7 @@
           </el-select>
       </el-form-item>
         <el-upload
-        action="/upload"
+        action="/upload/"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :before-remove="beforeRemove"
